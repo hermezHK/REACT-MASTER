@@ -3,15 +3,21 @@ import { categories } from "./core/category";
 
 export default function App() {
   return (
-    <>
-      <h1>Manage your time well</h1>
-      <div>
-        <div>
+    <div className="p-6">
+      <h1 className="text-2xl">Manage your time well</h1>
+      <div className="my-6">
+        <h2 className="font-semibold">Categories</h2>
+        <div className="flex mt-3 justify-between">
           {categories.map((category) => (
-            <TodoListCategory icon={category.icon} text={category.text} />
+            <TodoListCategory
+              key={category.text}
+              icon={category.icon}
+              text={category.text}
+            />
           ))}
         </div>
       </div>
-    </>
+      <h2 className="font-semibold">You have 10 task for today</h2>
+    </div>
   );
 }
