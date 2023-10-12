@@ -1,4 +1,5 @@
-import { book, briefcase, shoppingBag, signal } from "./assets/icons";
+import { TodoListCategory } from "./components";
+import { categories } from "./core/category";
 
 export default function App() {
   return (
@@ -6,8 +7,9 @@ export default function App() {
       <h1>Manage your time well</h1>
       <div>
         <div>
-          <img src={briefcase} alt="" />
-          <p>Work</p>
+          {categories.map((category) => (
+            <TodoListCategory icon={category.icon} text={category.text} />
+          ))}
         </div>
       </div>
     </>
