@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 
-export default function TodoListCategory({ icon, text }) {
+export default function TodoListCategory({ icon, text, setCurrentCategory }) {
   return (
-    <button className="grid place-items-center cursor-pointer">
+    <button
+      className="grid place-items-center cursor-pointer"
+      onClick={() => setCurrentCategory(text)}
+    >
       <img
         src={icon}
         alt=""
@@ -16,4 +19,5 @@ export default function TodoListCategory({ icon, text }) {
 TodoListCategory.propTypes = {
   icon: PropTypes.string,
   text: PropTypes.string,
+  setCurrentCategory: PropTypes.func,
 };
