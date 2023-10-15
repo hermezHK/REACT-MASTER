@@ -5,6 +5,7 @@ import { tasks } from "./mock/tasks";
 
 export default function App() {
   const [currentCategory, setCurrentCategory] = useState(null);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="p-6">
@@ -25,17 +26,20 @@ export default function App() {
       </div>
       <div className="flex justify-between">
         <h2 className="font-semibold">You have 10 task for today</h2>
-        <button 
+        <button
           onClick={() => setCurrentCategory(null)}
-          className="text-sm text-blue-500">Clear filter</button>
+          className="text-sm text-blue-500"
+        >
+          Clear filter
+        </button>
       </div>
-      <TodoList 
-        tasks={tasks} 
-        category={currentCategory}
-      />
-      <Modal open={true}>
-        <h1>IT'S A MODAL</h1>
-      <button className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full w-12 h-12 text-2xl">
+      <TodoList tasks={tasks} category={currentCategory} />
+      <Modal open={open} onClose={() => setOpen(!open)}>
+        <h1>is a Modal</h1>
+      </Modal>
+      <button
+        onClick={() => setOpen(!open)} 
+        className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full w-12 h-12 text-2xl">
         +
       </button>
     </div>
