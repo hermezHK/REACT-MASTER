@@ -7,7 +7,7 @@ export default function TodoList({ tasks, category }) {
     : tasks;
 
   return (
-    <div className="my-3 rounded-xl bg-gray-200 p-3">
+    <div className="my-3 rounded-xl bg-gray-300 p-3">
       {filterTask.length > 0 ? (
         filterTask.map((task) => (
           <div

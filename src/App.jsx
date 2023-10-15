@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TodoList, TodoListCategory } from "./components";
+import { Modal, TodoList, TodoListCategory } from "./components";
 import { categories } from "./core/category";
 import { tasks } from "./mock/tasks";
 
@@ -18,6 +18,7 @@ export default function App() {
               icon={category.icon}
               text={category.text}
               setCurrentCategory={setCurrentCategory}
+              currentCategory={currentCategory}
             />
           ))}
         </div>
@@ -32,6 +33,11 @@ export default function App() {
         tasks={tasks} 
         category={currentCategory}
       />
+      <Modal open={true}>
+        <h1>IT'S A MODAL</h1>
+      <button className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full w-12 h-12 text-2xl">
+        +
+      </button>
     </div>
   );
 }
