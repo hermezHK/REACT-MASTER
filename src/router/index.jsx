@@ -1,12 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage } from "../pages";
+import { HomePage, DetailPage } from "../pages";
+import { MainLayout } from "../layouts";
 
 export default function Router() {
-    return (
-        <BrowserRouter>
-        <Routes>
-            <Route path="/" element={ <HomePage /> } />
-        </Routes>
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={ <MainLayout /> }>
+          <Route path="" element={<HomePage />} />
+          <Route path="detail/:id" element={<DetailPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
