@@ -8,7 +8,7 @@ export default function TodoList({ tasks, category }) {
 
   return (
     <div className="my-3 rounded-xl bg-gray-300 p-3">
-      {filterTask.length > 0 ? (
+      {filterTask && filterTask.length > 0 ? (
         filterTask.map((task) => (
           <div
             key={task.text}
