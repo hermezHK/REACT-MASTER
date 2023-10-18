@@ -1,19 +1,32 @@
 import { useState } from "react";
 import { Modal, Select } from "../../components";
 import { categories } from "../../core/category";
+import { create } from "../../services";
+import PropTypes from "prop-types";
 
-export default function CreateTask() {
+export default function CreateTask({ getTasks}) {
   const [open, setOpen] = useState(false);
 
   const [listCategories, setListCategories] = useState(categories);
 
-  const [selectCategory, setSelectCategory] = useState({
+  const [values, setValues] = useState({
+    text: "",
     select: listCategories[0],
     current: null,
+    status: "created",
+    doneAt: null,
   });
 
   const handleChangeList = (e) => {
-    setSelectCategory({
+    if (e.target) {
+      setValues({
+        ...values,
+        [e.target.name]: e.target.value,
+      });
+      return;
+    }
+    setValues({
+      ...values,
       select: e,
       current: e,
     });
@@ -23,16 +36,40 @@ export default function CreateTask() {
   };
 
   const handleMouse = (category) => {
-    setSelectCategory({
-      ...selectCategory,
+    setValues({
+      ...values,
       current: category,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = structuredClone(values);
+    const category = data.select.text;
+
+    delete data.select;
+    delete data.current;
+
+    await create({
+      ...data,
+      category,
+    });
+
+    setValues({
+      text: "",
+      select: listCategories[0],
+      current: null,
+      status: "created",
+      doneAt: null,
+    });
+    setOpen(false);
+    await getTasks();
   };
 
   return (
     <>
       <Modal open={open} onClose={() => setOpen(!open)}>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <h2>Create Task</h2>
           <div className="my-5">
             <div>
@@ -40,15 +77,26 @@ export default function CreateTask() {
                 type="text"
                 placeholder="write here"
                 className="w-full border px-2 py-3 rounded outline-none"
+                name="text"
+                values={values.text}
+                onChange={handleChangeList}
               />
             </div>
             <div className="mt-5">
               <Select
-                value={selectCategory}
+                value={values}
                 onChange={handleChangeList}
                 onMouseEnter={handleMouse}
                 listItems={listCategories}
               />
+            </div>
+            <div className="mt-5 ">
+              <button
+                type="submit"
+                className="bg-blue-500 w-full py-3 rounded text-white shadow text-lg uppercase tracking-wide font-semibold"
+              >
+                Create Task
+              </button>
             </div>
           </div>
         </form>
@@ -61,4 +109,9 @@ export default function CreateTask() {
       </button>
     </>
   );
+}
+
+
+CreateTask.propTypes = {
+  getTasks: PropTypes.func,
 }
