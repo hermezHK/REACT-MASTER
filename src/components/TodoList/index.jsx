@@ -3,7 +3,7 @@ import { checkCircle } from "../../assets/icons";
 
 export default function TodoList({ tasks, category }) {
   const filterTask = category
-    ? tasks.filter((task) => task.category === category)
+    ? tasks?.filter((task) => task.category === category)
     : tasks;
 
   return (

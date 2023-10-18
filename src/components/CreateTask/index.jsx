@@ -8,7 +8,7 @@ export default function CreateTask() {
   const [listCategories, setListCategories] = useState(categories);
 
   const [selectCategory, setSelectCategory] = useState({
-    select: categories[0],
+    select: listCategories[0],
     current: null,
   });
 

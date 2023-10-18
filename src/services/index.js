@@ -30,6 +30,6 @@ export async function destroy(id) {
     return await makeHttpRequest({
         method: "delete",
         id,
-        url: "tasks"
+        url: "tasks",
     });
 }

@@ -18,7 +18,7 @@ export async function makeHttpRequest({ method, url, id, body }) {
     };
 
     try {
-        const data = await requests[method]();
+        const { data } = await requests[method]();
         return success(data);
     } catch (error) {
         return failed(error);
